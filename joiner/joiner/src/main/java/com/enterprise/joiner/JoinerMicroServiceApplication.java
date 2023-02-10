@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 public class JoinerMicroServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(JoinerMicroServiceApplication.class, args);
+		SpringApplication.run(JoinerMicroServiceApplication.class,args);
 	}
 
 }
