@@ -1,9 +1,13 @@
 # Build
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 ## Docker
+These are the steps to run postgres in docker for joiner project.
+
+Command to pull postgres image:
 ```sh
 docker pull postgres
 ```
+Command to run the container with postgres image, creating the user and password to use postgres db:
 ```sh
 docker run \
 --name postgres-db\
@@ -13,12 +17,18 @@ docker run \
 -v /data:/var/lib/postgresql/data\
 -d postgres
 ```
+
+Command to enter interact mode for the container created in the previous step:
 ```sh
 docker exec -it postgres-db bash
 ```
+
+Command to enter to postgres db:
 ```sh
 psql -h localhost -U enterprise
 ```
+
+Command to create joiner table: 
 ```sh
 CREATE TABLE joiner (
 id int UNIQUE,
