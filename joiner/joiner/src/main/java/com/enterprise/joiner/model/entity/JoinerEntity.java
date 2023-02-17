@@ -7,16 +7,20 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "joiner", uniqueConstraints = {@UniqueConstraint(columnNames = {"id", "identification_number"})})
 @Data
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class JoinerEntity implements Serializable {
     private static final long serialVersionUID = -428136512535457427L;
     @Id
@@ -36,9 +40,9 @@ public class JoinerEntity implements Serializable {
     @Column(name = "role")
     private String role;
     @NotBlank
-    @Column(name = "role")
-    private String english_level;
+    @Column(name = "english_level")
+    private String englishLevel;
     @NotBlank
-    @Column(name = "role")
-    private String domain_experience;
+    @Column(name = "domain_experience")
+    private String domainExperience;
 }
