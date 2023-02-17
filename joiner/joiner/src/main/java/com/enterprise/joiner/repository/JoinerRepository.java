@@ -9,4 +9,5 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface JoinerRepository extends JpaRepository<JoinerEntity, Long> {
 
+    JoinerEntity findByIdentificationNumber(Long identificationNumber);
 }

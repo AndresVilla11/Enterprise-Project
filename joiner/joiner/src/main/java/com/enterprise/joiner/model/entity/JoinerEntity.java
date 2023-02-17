@@ -7,16 +7,17 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "joiner", uniqueConstraints = {@UniqueConstraint(columnNames = {"id", "identification_number"})})
+@Table(name = "JOINER", uniqueConstraints = {@UniqueConstraint(columnNames = {"id", "identification_number"})})
 @Data
 @NoArgsConstructor
 @Builder
@@ -26,7 +27,7 @@ public class JoinerEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank
+    @NotNull
     @Column(name = "identification_number")
     private Long identificationNumber;
     @Column(name = "name")

@@ -31,7 +31,7 @@ psql -h localhost -U enterprise
 Command to create joiner table: 
 ```sh
 CREATE TABLE joiner (
-id int UNIQUE,
+id SERIAL UNIQUE,
 identification_number int UNIQUE,
 name varchar(255),
 last_name varchar(255),
