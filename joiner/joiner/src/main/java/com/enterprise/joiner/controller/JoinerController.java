@@ -3,6 +3,7 @@ package com.enterprise.joiner.controller;
 import com.enterprise.joiner.model.dto.request.JoinerRequest;
 import com.enterprise.joiner.model.dto.response.JoinerResponse;
 import com.enterprise.joiner.service.JoinerService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
