@@ -39,7 +39,6 @@ public class JoinerController {
     @PutMapping(value = "/{joinerId}")
     @ResponseStatus(HttpStatus.OK)
     public JoinerResponse updateJoiner(@PathVariable Long joinerId, @RequestBody JoinerRequest joinerRequest) {
-        System.out.println("update joiner controller");
         return joinerService.updateJoiner(joinerId, joinerRequest);
     }
 }

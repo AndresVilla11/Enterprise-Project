@@ -17,16 +17,11 @@ public class JoinerServiceImpl implements JoinerService {
     JoinerRepository joinerRepository;
     @Override
     public JoinerResponse updateJoiner(Long joinerId, JoinerRequest newJoinerInfo) {
-        System.out.println("update joiner service " + newJoinerInfo);
         JoinerEntity joiner = Optional.of(joinerRepository.findById(joinerId))
                 .get()
                 .orElseThrow(() -> new IllegalArgumentException("Joiner with id: " + joinerId + " not found."));
 
-        System.out.println("Joiner found " + joiner);
-        JoinerEntity j2 = updateJoinerInfo(joiner, newJoinerInfo);
-        System.out.println(j2);
         JoinerEntity updatedJoiner= joinerRepository.save(updateJoinerInfo(joiner, newJoinerInfo));
-        System.out.println("Joiner updated " + updatedJoiner);
 
         return JoinerResponse.builder()
                 .identificationNumber(updatedJoiner.getIdentificationNumber())

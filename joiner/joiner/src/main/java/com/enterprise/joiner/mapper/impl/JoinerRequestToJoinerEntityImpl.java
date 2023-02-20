@@ -19,17 +19,4 @@ public class JoinerRequestToJoinerEntityImpl implements JoinerRequestToJoinerEnt
                 .domainExperience(joinerRequest.getDomainExperience())
                 .build();
     }
-
-    //@Override
-    public JoinerEntity map(JoinerEntity joiner, JoinerRequest joinerRequest) {
-        return JoinerEntity.builder()
-                .identificationNumber(joinerRequest.getIdentificationNumber())
-                .name(joinerRequest.getName())
-                .lastName(joinerRequest.getLastName())
-                .stack(joinerRequest.getStack())
-                .role(joinerRequest.getRole())
-                .englishLevel(joinerRequest.getEnglishLevel())
-                .domainExperience(joinerRequest.getDomainExperience())
-                .build();
-    }
 }
