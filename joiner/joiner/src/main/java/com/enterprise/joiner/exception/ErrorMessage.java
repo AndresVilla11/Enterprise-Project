@@ -15,7 +15,6 @@ public class ErrorMessage {
         this.exception = exception.getClass().getSimpleName();
         this.path = path;
     }
-
     public ErrorMessage(String message, Exception exception, String path) {
         this.message = message;
         this.exception = exception.getClass().getSimpleName();

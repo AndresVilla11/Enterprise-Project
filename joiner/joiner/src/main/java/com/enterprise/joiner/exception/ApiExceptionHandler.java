@@ -46,9 +46,10 @@ public class ApiExceptionHandler {
         return new ErrorMessage(exception, request.getRequestURI());
     }
 
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(Exception.class)
     public ErrorMessage notFound(HttpServletRequest request, Exception exception) {
         return new ErrorMessage(exception, request.getRequestURI());
     }
 }
+
