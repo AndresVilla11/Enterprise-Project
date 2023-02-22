@@ -30,7 +30,7 @@ public class DummyMock {
                 .build();
     }
 
-    public JoinerRequest updateJoinerRequest() {
+    public JoinerRequest updateJoinerRequestNameStack() {
         return JoinerRequest.builder()
                 .name("Dan")
                 .stack("go")

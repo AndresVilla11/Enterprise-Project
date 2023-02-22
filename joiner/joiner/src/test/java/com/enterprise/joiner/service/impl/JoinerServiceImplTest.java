@@ -1,5 +1,6 @@
 package com.enterprise.joiner.service.impl;
 
+import com.enterprise.joiner.exception.DuplicateDataBaseException;
 import com.enterprise.joiner.mapper.JoinerRequestToJoinerEntity;
 import com.enterprise.joiner.mock.DummyMock;
 import com.enterprise.joiner.model.dto.request.JoinerRequest;
@@ -14,8 +15,10 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
 class JoinerServiceImplTest {
@@ -37,7 +40,7 @@ class JoinerServiceImplTest {
     }
 
     @Test
-    void createJoiner() {
+    void createJoinerSuccesful() {
         JoinerRequest joinerRequest = dummyMock.createJoinerRequest();
         when(joinerRepository.save(any(JoinerEntity.class))).thenReturn(dummyMock.createJoinerEntity());
         when(joinerRequestToJoinerEntity.map(any(JoinerRequest.class))).thenReturn(dummyMock.createJoinerEntity());
@@ -49,8 +52,19 @@ class JoinerServiceImplTest {
     }
 
     @Test
-    void updateJoiner() {
-        JoinerRequest joinerRequest = dummyMock.updateJoinerRequest();
+    void createJoinerValidateDuplicateDataBaseException() {
+        JoinerRequest joinerRequest = dummyMock.createJoinerRequest();
+        when(joinerRepository.findByIdentificationNumber(anyLong())).thenReturn(new JoinerEntity());
+        Exception exception = assertThrows(DuplicateDataBaseException.class, () -> {
+            joinerService.createJoiner(joinerRequest);
+        });
+
+        assertEquals("Duplicate data in database null identification number", exception.getMessage());
+    }
+
+    @Test
+    void updateJoinerSuccessful() {
+        JoinerRequest joinerRequest = dummyMock.updateJoinerRequestNameStack();
         when(joinerRepository.findById(any(Long.class))).thenReturn(Optional.ofNullable(dummyMock.createJoinerEntity()));
         when(joinerRepository.save(any(JoinerEntity.class))).thenReturn(dummyMock.updateJoinerEntity());
         JoinerResponse joinerResponse = joinerService.updateJoiner(1l, joinerRequest);
@@ -59,7 +73,7 @@ class JoinerServiceImplTest {
 
     @Test
     void updateJoinerException() {
-        JoinerRequest joinerRequest = dummyMock.updateJoinerRequest();
+        JoinerRequest joinerRequest = dummyMock.updateJoinerRequestNameStack();
         when(joinerRepository.findById(any(Long.class))).thenReturn(Optional.ofNullable(null));
         when(joinerRepository.save(any(JoinerEntity.class))).thenReturn(dummyMock.updateJoinerEntity());
 
@@ -72,7 +86,7 @@ class JoinerServiceImplTest {
 
     @Test
     void updateJoinerWithEmptyBody() {
-        JoinerRequest joinerRequest = dummyMock.updateJoinerRequest();
+        JoinerRequest joinerRequest = dummyMock.updateJoinerRequestNameStack();
         when(joinerRepository.findById(any(Long.class))).thenReturn(Optional.ofNullable(dummyMock.createJoinerEntity()));
         when(joinerRepository.save(any(JoinerEntity.class))).thenReturn(dummyMock.updateJoinerEntity());
         JoinerResponse joinerResponse = joinerService.updateJoiner(1l, new JoinerRequest());
