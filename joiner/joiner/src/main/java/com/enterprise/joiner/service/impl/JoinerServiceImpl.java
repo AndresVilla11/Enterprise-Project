@@ -8,8 +8,9 @@ import com.enterprise.joiner.model.entity.JoinerEntity;
 import com.enterprise.joiner.repository.JoinerRepository;
 import com.enterprise.joiner.service.JoinerService;
 import com.enterprise.joiner.utils.Constants;
-import io.micrometer.common.util.StringUtils;
+
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -57,7 +58,7 @@ public class JoinerServiceImpl implements JoinerService {
     private JoinerEntity updateJoinerInfo(JoinerEntity joiner, JoinerRequest newJoinerInfo) {
 
         Long identificationNumber = newJoinerInfo.getIdentificationNumber();
-        if (StringUtils.isNotBlank(String.valueOf(identificationNumber))) {
+        if (identificationNumber != null) {
             joiner.setIdentificationNumber(identificationNumber);
         }
 

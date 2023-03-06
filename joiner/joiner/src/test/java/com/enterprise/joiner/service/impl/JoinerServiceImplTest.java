@@ -64,7 +64,7 @@ class JoinerServiceImplTest {
 
     @Test
     void updateJoinerSuccessful() {
-        JoinerRequest joinerRequest = dummyMock.updateJoinerRequestNameStack();
+        JoinerRequest joinerRequest = dummyMock.createJoinerRequest();
         when(joinerRepository.findById(any(Long.class))).thenReturn(Optional.ofNullable(dummyMock.createJoinerEntity()));
         when(joinerRepository.save(any(JoinerEntity.class))).thenReturn(dummyMock.updateJoinerEntity());
         JoinerResponse joinerResponse = joinerService.updateJoiner(1l, joinerRequest);
@@ -88,8 +88,26 @@ class JoinerServiceImplTest {
     void updateJoinerWithEmptyBody() {
         JoinerRequest joinerRequest = dummyMock.updateJoinerRequestNameStack();
         when(joinerRepository.findById(any(Long.class))).thenReturn(Optional.ofNullable(dummyMock.createJoinerEntity()));
-        when(joinerRepository.save(any(JoinerEntity.class))).thenReturn(dummyMock.updateJoinerEntity());
-        JoinerResponse joinerResponse = joinerService.updateJoiner(1l, new JoinerRequest());
+        when(joinerRepository.save(any(JoinerEntity.class))).thenReturn(dummyMock.updateJoinerEntityNameStack());
+        JoinerResponse joinerResponse = joinerService.updateJoiner(1l, dummyMock.updateJoinerRequestNullValues());
+        assertEquals(joinerRequest.getName(), joinerResponse.getName());
+    }
+
+    @Test
+    void updateJoinerIdentificationNumber() {
+        JoinerRequest joinerRequest = dummyMock.updateJoinerRequestIdentificationNumber();
+        when(joinerRepository.findById(any(Long.class))).thenReturn(Optional.ofNullable(dummyMock.createJoinerEntity()));
+        when(joinerRepository.save(any(JoinerEntity.class))).thenReturn(dummyMock.updateJoinerEntityIdentificationNumber());
+        JoinerResponse joinerResponse = joinerService.updateJoiner(1L, joinerRequest);
+        assertEquals(joinerRequest.getIdentificationNumber(), joinerResponse.getIdentificationNumber());
+    }
+
+    @Test
+    void updateJoinerRole() {
+        JoinerRequest joinerRequest = dummyMock.updateJoinerRequestRole();
+        when(joinerRepository.findById(any(Long.class))).thenReturn(Optional.of(dummyMock.createJoinerEntity()));
+        when(joinerRepository.save(any(JoinerEntity.class))).thenReturn(dummyMock.updateJoinerEntityRole());
+        JoinerResponse joinerResponse = joinerService.updateJoiner(1L, joinerRequest);
         assertEquals(joinerRequest.getName(), joinerResponse.getName());
     }
 }

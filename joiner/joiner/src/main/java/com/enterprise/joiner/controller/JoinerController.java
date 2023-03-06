@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class JoinerController {
     private final JoinerService joinerService;
     @GetMapping
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.OK)
     public String getJoiner() {
         return "Hello Joiner";
     }
